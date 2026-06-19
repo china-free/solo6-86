@@ -77,7 +77,7 @@ const ShoppingListPage = () => {
           <Button
             variant="secondary"
             size="sm"
-            onClick={regenerate}
+            onClick={() => regenerate()}
             className="justify-center"
           >
             <RefreshCw size={16} />
@@ -86,7 +86,7 @@ const ShoppingListPage = () => {
           <Button
             variant="outline"
             size="sm"
-            onClick={resetChecked}
+            onClick={() => resetChecked()}
             className="justify-center"
           >
             <Circle size={16} />
@@ -95,7 +95,7 @@ const ShoppingListPage = () => {
           <Button
             variant="outline"
             size="sm"
-            onClick={resetAdjustments}
+            onClick={() => resetAdjustments()}
             className="justify-center"
           >
             <RotateCcw size={16} />
@@ -199,7 +199,7 @@ const ShoppingListPage = () => {
           <p className="text-primary-500 text-sm mb-6">
             先去菜单计划页面添加菜品吧
           </p>
-          <Button onClick={regenerate}>
+          <Button onClick={() => regenerate()}>
             <RefreshCw size={18} />
             生成清单
           </Button>
