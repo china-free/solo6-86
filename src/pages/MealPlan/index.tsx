@@ -52,6 +52,7 @@ const MealPlanPage = () => {
   const handleSelectDish = (dish: Dish) => {
     if (selectedDay && selectedMeal) {
       addDish(selectedDay, selectedMeal, dish);
+      regenerate();
       setShowDishSelector(false);
       setSelectedDay(null);
       setSelectedMeal(null);
@@ -60,10 +61,12 @@ const MealPlanPage = () => {
 
   const handleRemoveDish = (dateKey: string, mealType: MealType, dishId: string) => {
     removeDish(dateKey, mealType, dishId);
+    regenerate();
   };
 
   const handleClearWeek = () => {
     clearWeek();
+    regenerate();
     setShowClearConfirm(false);
   };
 

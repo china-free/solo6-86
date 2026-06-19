@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from 'react';
-import { RefreshCw, CheckCircle2, Circle, ShoppingCart, Trash2 } from 'lucide-react';
+import { RefreshCw, CheckCircle2, Circle, ShoppingCart, Trash2, RotateCcw } from 'lucide-react';
 import { useShoppingStore } from '@/store/useShoppingStore';
 import { useMealStore } from '@/store/useMealStore';
 import type { IngredientCategory } from '@/types';
@@ -33,7 +33,7 @@ const CATEGORY_ICONS: Record<IngredientCategory | 'all', string> = {
 };
 
 const ShoppingListPage = () => {
-  const { items, activeCategory, setActiveCategory, toggleItem, updateAmount, resetChecked, regenerate } =
+  const { items, activeCategory, setActiveCategory, toggleItem, updateAmount, resetChecked, resetAdjustments, regenerate } =
     useShoppingStore();
   const { days } = useMealStore();
 
@@ -91,6 +91,15 @@ const ShoppingListPage = () => {
           >
             <Circle size={16} />
             重置勾选
+          </Button>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={resetAdjustments}
+            className="justify-center"
+          >
+            <RotateCcw size={16} />
+            重置调整
           </Button>
         </div>
       </div>

@@ -11,6 +11,7 @@ interface ShoppingState {
   toggleItem: (ingredientId: string) => void;
   updateAmount: (ingredientId: string, amount: number) => void;
   resetChecked: () => void;
+  resetAdjustments: () => void;
   clearAll: () => void;
   regenerate: () => void;
 }
@@ -59,25 +60,23 @@ export const useShoppingStore = create<ShoppingState>()(
         const { days } = useMealStore.getState();
         const newItems = calculateShoppingList(days);
         const checkedMap = new Map<string, boolean>();
-        const adjustedMap = new Map<string, number>();
 
         get().items.forEach((item) => {
           checkedMap.set(item.ingredientId, item.checked);
-          if (item.adjusted) {
-            adjustedMap.set(item.ingredientId, item.totalAmount);
-          }
         });
 
         const mergedItems = newItems.map((item) => {
           const checked = checkedMap.get(item.ingredientId) ?? false;
-          const adjustedAmount = adjustedMap.get(item.ingredientId);
-          if (adjustedAmount !== undefined) {
-            return { ...item, checked, totalAmount: adjustedAmount, adjusted: true };
-          }
           return { ...item, checked };
         });
 
         set({ items: mergedItems });
+      },
+
+      resetAdjustments: () => {
+        set((state) => ({
+          items: state.items.map((item) => ({ ...item, adjusted: false })),
+        }));
       },
     }),
     {

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Plus, Trash2, Eye, Copy, BookmarkPlus } from 'lucide-react';
 import { useTemplateStore } from '@/store/useTemplateStore';
 import { useMealStore } from '@/store/useMealStore';
+import { useShoppingStore } from '@/store/useShoppingStore';
 import type { DayMeals, MealTemplate } from '@/types';
 import Modal from '@/components/Modal';
 import Button from '@/components/Button';
@@ -14,6 +15,7 @@ const EMOJI_OPTIONS = ['🍱', '🥗', '🍜', '🍝', '🥘', '🍲', '🥣', '
 const TemplatesPage = () => {
   const { templates, addTemplate, removeTemplate, getTemplate } = useTemplateStore();
   const { days, applyTemplate } = useMealStore();
+  const { regenerate } = useShoppingStore();
   const navigate = useNavigate();
 
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -50,6 +52,7 @@ const TemplatesPage = () => {
 
   const handleApplyTemplate = (template: MealTemplate) => {
     applyTemplate(template.meals);
+    regenerate();
     navigate('/');
   };
 
